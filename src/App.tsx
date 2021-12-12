@@ -1,7 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { PokemonClient } from "pokenode-ts";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    try {
+      const api = new PokemonClient();
+
+      const data = await api.getPokemonByName("luxray");
+      console.log(data.name);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
